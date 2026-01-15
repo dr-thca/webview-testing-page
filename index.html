@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>testing_page</title>
+  </head>
+  // lets console log the window.ReactNativeWebView object to see if it is
+  available
+  <script>
+    console.log("window.ReactNativeWebView:", window.ReactNativeWebView);
+    // lets store in the global scope for easy access for later, since i cant open the developer tools fast enough
+    window.RNWV = window.ReactNativeWebView;
+
+  </script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
