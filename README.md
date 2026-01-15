@@ -22,19 +22,21 @@ npm run dev
 ```
 
 The `dev` script uses `vite --host` so Vite binds to `0.0.0.0`. This is
-important for Android emulators/simulators and real devices because they cannot
-reach `localhost` on your machine. Use your machine's LAN IP (or emulator host
+important for emulators/simulators and real devices because they cannot reach
+`localhost` on your machine. Use your machine's LAN IP (or the emulator host
 alias) when pointing the WebView to this page.
 
-Example:
+Examples:
 
 ```
 http://192.168.1.25:3000
+http://10.0.2.2:3000
 ```
 
 ## WebView usage notes
 
-- Load the dev server URL in a React Native `WebView`.
+- Load the dev server URL in a React Native `WebView`. For Android emulators,
+  use `http://10.0.2.2:3000` to reach your host machine.
 - Use the "Send to native" or "Send custom message" buttons to trigger messages
   on the native side.
 - Messages received from native will show up in the message log.
