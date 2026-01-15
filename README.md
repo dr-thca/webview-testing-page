@@ -35,8 +35,9 @@ http://10.0.2.2:3000
 
 ## WebView usage notes
 
-- Load the dev server URL in a React Native `WebView`. For Android emulators,
-  use `http://10.0.2.2:3000` to reach your host machine.
+- Load the dev server URL in a React Native `WebView`. For iOS simulators,
+  `http://localhost:3000` works. For Android emulators, use
+  `http://10.0.2.2:3000` to reach your host machine.
 - Use the "Send to native" or "Send custom message" buttons to trigger messages
   on the native side.
 - Messages received from native will show up in the message log.
