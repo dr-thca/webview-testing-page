@@ -1,6 +1,6 @@
 :root {
   font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.4;
   font-weight: 400;
   color: #1f2328;
   background-color: #f2f1ed;
@@ -8,6 +8,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
 }
 
 * {

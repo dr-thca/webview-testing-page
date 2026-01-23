@@ -1,10 +1,10 @@
 .app {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 48px 24px 80px;
+  padding: 28px 20px 48px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 20px;
   color: #1e1f21;
 }
 
@@ -12,22 +12,27 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 32px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 0.72rem;
-  margin: 0 0 12px;
+  font-size: 0.68rem;
+  margin: 0 0 8px;
   color: #5b636a;
 }
 
 .subhead {
-  margin: 12px 0 0;
-  font-size: 1rem;
+  margin: 6px 0 0;
+  font-size: 0.82rem;
   color: #4a5157;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.25rem;
 }
 
 .mono {
@@ -36,47 +41,53 @@
 }
 
 .status-card {
-  min-width: 240px;
-  padding: 18px 20px;
-  border-radius: 14px;
+  min-width: 220px;
+  padding: 14px 16px;
+  border-radius: 12px;
   border: 1px solid #d8dde3;
   background: #ffffff;
-  box-shadow: 0 10px 24px rgba(14, 25, 37, 0.08);
+  box-shadow: 0 8px 18px rgba(14, 25, 37, 0.08);
 }
 
 .status-label {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: #5f676e;
-  margin-bottom: 8px;
-}
-
-.status-value {
-  font-size: 1.6rem;
-  font-weight: 600;
   margin-bottom: 6px;
 }
 
+.status-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
 .status-meta {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #7a8288;
 }
 
 .panel {
-  padding: 24px;
-  border-radius: 18px;
+  padding: 18px;
+  border-radius: 14px;
   border: 1px solid #d9dee4;
   background: #fdfcf9;
 }
 
 .panel h2 {
-  margin: 0 0 16px;
-  font-size: 1.25rem;
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.panel-subhead {
+  margin: 0 0 10px;
+  color: #5b636a;
+  font-size: 0.82rem;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
 }
 
 .field {
@@ -86,23 +97,24 @@
 }
 
 .field label {
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   color: #5b636a;
 }
 
-.field input {
-  padding: 10px 12px;
+.field input,
+.field select {
+  padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid #cfd5db;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   background: #ffffff;
 }
 
 .field textarea {
-  padding: 10px 12px;
+  padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid #cfd5db;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   background: #ffffff;
   resize: vertical;
   font-family: 'SFMono-Regular', ui-monospace, SFMono-Regular, Menlo, Monaco,
@@ -113,7 +125,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: #5b636a;
 }
 
@@ -124,25 +136,25 @@
 }
 
 .counter-value {
-  min-width: 40px;
+  min-width: 36px;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
 }
 
 .actions button {
-  padding: 10px 14px;
+  padding: 6px 10px;
   border-radius: 10px;
   border: 1px solid #cfd5db;
   background: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   cursor: pointer;
 }
 
@@ -181,20 +193,21 @@
 }
 
 .log-meta {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #5c646b;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
 }
 
 .log-output {
   margin: 0;
-  padding: 16px;
+  padding: 10px;
   background: #0f1720;
   color: #e6edf3;
   border-radius: 12px;
-  min-height: 180px;
+  min-height: 140px;
   white-space: pre-wrap;
   overflow-x: auto;
+  font-size: 0.82rem;
 }
 
 @media (max-width: 720px) {
