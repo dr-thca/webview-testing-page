@@ -10,9 +10,14 @@ helpers so injected JavaScript can update the UI or append logs.
 - Displays a live message log of `message` events from `window` and `document`.
 - Sends structured payloads to the native layer using
   `window.ReactNativeWebView.postMessage` (with a `window.postMessage` fallback).
-- Reads and renders the injected JavaScript object
-  (`injectedObjectJson` / `injectedJavaScriptObject`).
-- Exposes `window.__setStatus` and `window.__appendLog` for injected scripts.
+- Reads and renders the injected app context from `window.__APP_CONTEXT__`, with a
+  refresh button to snapshot the latest value.
+- Tracks `appContextChanged` messages from the bridge and renders the latest
+  payload + timestamp.
+- Provides a navigation command form that sends the DR bridge `navigate` payload
+  (absolute URL, current time seconds, muted).
+- Exposes `window.__setStatus`, `window.__appendLog`, and
+  `window.__refreshInjectedObject` for injected scripts.
 
 ## Run locally
 
