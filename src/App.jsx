@@ -155,9 +155,10 @@ function App() {
   };
 
   useEffect(() => {
-    const handler = (event) => {
+    const createHandler = (source) => (event) => {
+      console.log(`[bridge] message event from ${source}`, event);
       const { data } = event;
-      appendLog("message", data);
+      appendLog(`message:${source}`, data);
 
       let parsed = null;
       if (typeof data === "string") {
@@ -178,12 +179,15 @@ function App() {
       }
     };
 
-    window.addEventListener("message", handler);
-    document.addEventListener("message", handler);
+    const windowHandler = createHandler("window");
+    const documentHandler = createHandler("document");
+
+    window.addEventListener("message", windowHandler);
+    document.addEventListener("message", documentHandler);
 
     return () => {
-      window.removeEventListener("message", handler);
-      document.removeEventListener("message", handler);
+      window.removeEventListener("message", windowHandler);
+      document.removeEventListener("message", documentHandler);
     };
   }, []);
 

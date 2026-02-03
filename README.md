@@ -26,6 +26,16 @@ npm install
 npm run dev
 ```
 
+## Build a single HTML file
+
+```bash
+npm run build:single
+```
+
+The single-file build is emitted to `dist/index.html`. It includes inline CSS,
+JS, and assets for easy injection into a React Native WebView using
+`source={{ html }}`. The output is readable (not minified).
+
 The `dev` script uses `vite --host` so Vite binds to `0.0.0.0`. This is
 important for emulators/simulators and real devices because they cannot reach
 `localhost` on your machine. Use your machine's LAN IP (or the emulator host
