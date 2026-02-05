@@ -35,7 +35,11 @@ function App() {
   const [status, setStatus] = useState("Idle");
   const [statusUpdatedAt, setStatusUpdatedAt] = useState(getTimestamp());
   const [customMessage, setCustomMessage] = useState(
-    JSON.stringify({ event_name: "custom", payload: { hello: "native" } }, null, 2),
+    JSON.stringify(
+      { event_name: "custom", payload: { hello: "native" } },
+      null,
+      2,
+    ),
   );
   const [customIsJson, setCustomIsJson] = useState(true);
   const [logs, setLogs] = useState([]);
@@ -102,8 +106,6 @@ function App() {
 
     return parsed;
   };
-
-
 
   const sendCustomToNative = () => {
     const raw = customMessage.trim();
@@ -191,8 +193,8 @@ function App() {
     };
   }, []);
 
-  const sendWebViewReady = useCallback(() => {
-    const payload = JSON.stringify({ event_name: "webviewReady", payload: {} });
+  const sendBridgeReady = useCallback(() => {
+    const payload = JSON.stringify({ event_name: "bridgeReady", payload: {} });
 
     if (window.ReactNativeWebView?.postMessage) {
       window.ReactNativeWebView.postMessage(payload);
@@ -200,17 +202,17 @@ function App() {
       window.postMessage(payload, "*");
     }
 
-    appendLog("bridge:webviewReady", payload);
-    updateStatus("WebView ready");
+    appendLog("bridge:bridgeReady", payload);
+    updateStatus("Bridge ready");
   }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      sendWebViewReady();
+      sendBridgeReady();
     }, 0);
 
     return () => clearTimeout(timer);
-  }, [sendWebViewReady]);
+  }, [sendBridgeReady]);
 
   useEffect(() => {
     window.__setStatus = updateStatus;
@@ -254,7 +256,9 @@ function App() {
       </section>
       <div className="log-meta">
         Event schemas: nyhedsapp repo →
-        <span className="mono">src/schemas/webview-bridge-message.schema.ts</span>
+        <span className="mono">
+          src/schemas/webview-bridge-message.schema.ts
+        </span>
       </div>
       <section className="panel">
         <h2>appContextChanged (live)</h2>
@@ -296,108 +300,107 @@ function App() {
         )}
       </section>
 
-        <section className="panel">
-          <h2>Navigate command</h2>
-          <p className="panel-subhead">
-            Sends the DR bridge payload for native navigation handling.
-          </p>
-          <div className="grid">
-            <div className="field">
-              <label htmlFor="navigate-url">Absolute URL</label>
-              <input
-                id="navigate-url"
-                value={navigateUrl}
-                onChange={(event) => setNavigateUrl(event.target.value)}
-              />
-            </div>
-            <div className="field">
-              <label htmlFor="navigate-time">Current time seconds</label>
-              <input
-                id="navigate-time"
-                placeholder="Optional"
-                value={navigateTime}
-                onChange={(event) => setNavigateTime(event.target.value)}
-              />
-            </div>
-            <div className="field">
-              <label htmlFor="navigate-muted">Muted</label>
-              <select
-                id="navigate-muted"
-                value={navigateMuted ? "true" : "false"}
-                onChange={(event) => setNavigateMuted(event.target.value === "true")}
-              >
-                <option value="true">True</option>
-                <option value="false">False</option>
-              </select>
-            </div>
-            <div className="actions">
-              <button type="button" onClick={sendNavigateToNative}>
-                Send navigate command
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setNavigateUrl(
-                    "https://www.dr.dk/nyheder/vejret/reels/russisk-halvoe-paa-vej-tilbage-til-hverdagen-efter-snedommedag",
-                  );
-                  setNavigateTime("10");
-                  setNavigateMuted(false);
-                }}
-              >
-                Load DR example
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setNavigateUrl("");
-                  setNavigateTime("");
-                  setNavigateMuted(false);
-                }}
-              >
-                Clear
-              </button>
-            </div>
+      <section className="panel">
+        <h2>Navigate command</h2>
+        <p className="panel-subhead">
+          Sends the DR bridge payload for native navigation handling.
+        </p>
+        <div className="grid">
+          <div className="field">
+            <label htmlFor="navigate-url">Absolute URL</label>
+            <input
+              id="navigate-url"
+              value={navigateUrl}
+              onChange={(event) => setNavigateUrl(event.target.value)}
+            />
           </div>
-        </section>
-        <div className="status-card">
-          <div className="status-label">Status</div>
-          <div id="status-text" className="status-value">
-            {status}
+          <div className="field">
+            <label htmlFor="navigate-time">Current time seconds</label>
+            <input
+              id="navigate-time"
+              placeholder="Optional"
+              value={navigateTime}
+              onChange={(event) => setNavigateTime(event.target.value)}
+            />
           </div>
-          <div className="status-meta">Last updated: {statusUpdatedAt}</div>
+          <div className="field">
+            <label htmlFor="navigate-muted">Muted</label>
+            <select
+              id="navigate-muted"
+              value={navigateMuted ? "true" : "false"}
+              onChange={(event) =>
+                setNavigateMuted(event.target.value === "true")
+              }
+            >
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </div>
+          <div className="actions">
+            <button type="button" onClick={sendNavigateToNative}>
+              Send navigate command
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setNavigateUrl("https://preprod.dr.dk/nyheder/indland/reels/seneste-nyt-reel-test");
+                setNavigateTime("10");
+                setNavigateMuted(false);
+              }}
+            >
+              Load DR example
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setNavigateUrl("");
+                setNavigateTime("");
+                setNavigateMuted(false);
+              }}
+            >
+              Clear
+            </button>
+          </div>
         </div>
-        <section className="panel">
-          <h2>Send events</h2>
-          <div className="grid">
-            <div className="field">
-              <label htmlFor="custom-message">
-                Custom message (string or JSON)
-              </label>
-              <textarea
-                id="custom-message"
-                rows={6}
-                value={customMessage}
-                onChange={(event) => setCustomMessage(event.target.value)}
-              />
-              <label className="checkbox-row">
-                <input
-                  type="checkbox"
-                  checked={customIsJson}
-                  onChange={(event) => setCustomIsJson(event.target.checked)}
-                />
-                Parse as JSON before sending
-              </label>
-            </div>
-            <div className="actions">
-              <button type="button" onClick={sendCustomToNative}>
-                Send event
-              </button>
-            </div>
-          </div>
-        </section>
+      </section>
+      <div className="status-card">
+        <div className="status-label">Status</div>
+        <div id="status-text" className="status-value">
+          {status}
+        </div>
+        <div className="status-meta">Last updated: {statusUpdatedAt}</div>
       </div>
-    );
-  }
-
+      <section className="panel">
+        <h2>Send events</h2>
+        <div className="grid">
+          <div className="field">
+            <label htmlFor="custom-message">
+              Custom message (string or JSON)
+            </label>
+            <textarea
+              id="custom-message"
+              rows={6}
+              value={customMessage}
+              onChange={(event) => setCustomMessage(event.target.value)}
+            />
+            <label className="checkbox-row">
+              <input
+                type="checkbox"
+                checked={customIsJson}
+                onChange={(event) => setCustomIsJson(event.target.checked)}
+              />
+              Parse as JSON before sending
+            </label>
+          </div>
+          <div className="actions">
+            <button type="button" onClick={sendCustomToNative}>
+              Send event
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
 
 export default App;
